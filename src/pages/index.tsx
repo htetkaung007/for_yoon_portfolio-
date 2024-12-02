@@ -11,6 +11,5 @@ import Layout from "@/components/Bar/Layout";
 import LandingPage from "@/components/test";
 
 export default function Home() {
-  const theme = useTheme();
   return <Header></Header>;
 }

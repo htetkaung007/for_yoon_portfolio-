@@ -63,6 +63,7 @@ const Skills = () => {
           alignItems: "center",
           flexWrap: "wrap",
           padding: 1,
+          mb: 4,
         }}
       >
         {/* Animate visible icons */}

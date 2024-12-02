@@ -31,7 +31,7 @@ const Header: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
         border: "1px ",
         borderRadius: "8px",
         boxShadow: "1px 2px 10px #888888",
-        bgcolor: theme.palette.primary.main, // Background color from theme
+        bgcolor: theme.palette.text.secondary, // Background color from theme
       }}
     >
       {/* photo */}

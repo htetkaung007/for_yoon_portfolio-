@@ -16,29 +16,26 @@ const Layout = ({ children }: Props) => {
   const theme = useTheme();
 
   return (
-    <Box>
-      <AppBar
-        color="primary"
-        sx={{
-          position: "sticky",
-          minWidth: "420px",
-          color: theme.palette.text.primary,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          padding: "10px",
-          border: "1px ",
-          borderRadius: "8px",
-          boxShadow: "1px 2px 10px #888888",
-          bgcolor: theme.palette.info.main,
-          height: "100vh ",
-        }}
-      >
-        <TopBar />
-        {children}
-      </AppBar>
-    </Box>
+    <AppBar
+      color="primary"
+      sx={{
+        position: "sticky",
+        minWidth: "420px",
+        color: theme.palette.text.primary,
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        padding: "10px",
+        border: "1px ",
+        borderRadius: "8px",
+        boxShadow: "1px 2px 10px #888888",
+        bgcolor: theme.palette.info.main,
+        minHeight: "100vh",
+      }}
+    >
+      <TopBar />
+      {children}
+    </AppBar>
   );
 };
 export default Layout;

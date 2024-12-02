@@ -24,7 +24,7 @@ const TopBar = () => {
   const theme = useTheme();
   const router = useRouter(); // Get the current route
   const isLaptopScreen = useMediaQuery("(min-width: 1200px)");
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery("(max-width:635px");
 
   const TopLeftBarItem = [
     {
@@ -53,6 +53,7 @@ const TopBar = () => {
           position: "sticky",
           minWidth: "400px",
           color: theme.palette.text.primary,
+          mt: 6,
           mb: 1,
           padding: "10px",
           border: "1px ",
@@ -76,7 +77,6 @@ const TopBar = () => {
               <Box
                 sx={{
                   flexGrow: 1,
-                  display: isSmallScreen ? "none" : "block",
                 }}
               >
                 <Link
@@ -101,6 +101,7 @@ const TopBar = () => {
                     <HomeIcon sx={{ fontSize: 35 }} />
                     <Typography
                       sx={{
+                        display: isSmallScreen ? "none" : "block",
                         alignItems: "center",
                         fontWeight: "bold",
                         fontSize: 17,
@@ -116,7 +117,7 @@ const TopBar = () => {
             {/* Other Links */}
             <Box sx={{ display: "flex" }}>
               {TopLeftBarItem.map((item) => (
-                <Box key={item.id} sx={{ mr: 3 }}>
+                <Box key={item.id}>
                   <Link
                     href={item.to}
                     style={{ textDecoration: "none", cursor: "pointer" }}
@@ -125,12 +126,8 @@ const TopBar = () => {
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        /* backgroundColor:
-                          router.pathname === item.to
-                           ? theme.palette.text.secondary
-                          : theme.palette.text.primary, */
-                        padding: "8px 12px",
-                        borderRadius: "4px",
+
+                        paddingLeft: "18px",
                       }}
                     >
                       <ListItemText
