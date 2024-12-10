@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Divider, Typography } from "@mui/material";
-import { motion } from "framer-motion"; // For animation
+import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faJava } from "@fortawesome/free-brands-svg-icons"; // Java icon from Font Awesome
+import { faJava } from "@fortawesome/free-brands-svg-icons";
 
 const AnimatedJavaSkill: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ const AnimatedJavaSkill: React.FC = () => {
             icon={faJava}
             style={{
               fontSize: "4rem",
-              color: "#FF6F00", // Java orange color
+              color: "#FF6F00",
             }}
           />
         </motion.div>

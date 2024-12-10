@@ -1,5 +1,5 @@
 import Layout from "@/components/Bar/Layout";
-import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
+import ThemeProviderWrapper from "@/components/utils/ThemeProviderWrapper";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";

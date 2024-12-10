@@ -1,41 +1,61 @@
-import { AppBar, Box, Toolbar, Typography, useTheme } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useContext } from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
-import { ThemeContext } from "../ThemeProviderWrapper";
+import { ThemeContext } from "../utils/ThemeProviderWrapper";
 import TopBar from "./topBar";
+import { motion } from "framer-motion";
+import MovingSquare from "./MovingIcon";
 interface Props {
   children?: React.ReactNode;
 }
 
 const Layout = ({ children }: Props) => {
-  /*  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) return null;
-
-  const { toggleTheme } = themeContext;*/
   const theme = useTheme();
+  const isLaptopScreen = useMediaQuery("(min-width: 1200px)");
 
   return (
-    <AppBar
-      color="primary"
-      sx={{
-        position: "sticky",
-        minWidth: "420px",
-        color: theme.palette.text.primary,
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        padding: "10px",
-        border: "1px ",
-        borderRadius: "8px",
-        boxShadow: "1px 2px 10px #888888",
-        bgcolor: theme.palette.info.main,
-        minHeight: "100vh",
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.5,
+        delay: 0.2,
       }}
     >
-      <TopBar />
-      {children}
-    </AppBar>
+      <AppBar
+        color="primary"
+        sx={{
+          position: "sticky",
+
+          color: theme.palette.text.primary,
+          display: "flex",
+          alignItems: "center",
+          margin: "auto",
+          width: "100%",
+          padding: "10px",
+
+          bgcolor: theme.palette.info.main,
+          minHeight: "100vh",
+        }}
+      >
+        <Box
+          sx={{
+            minWidth: "420px",
+            width: isLaptopScreen ? "1000px" : "80%",
+          }}
+        >
+          <MovingSquare />
+          <TopBar children={children} />
+        </Box>
+      </AppBar>
+    </motion.div>
   );
 };
 export default Layout;

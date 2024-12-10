@@ -10,15 +10,14 @@ import {
 } from "@mui/material";
 import { List } from "@mui/material";
 
-import { lightTheme } from "../theme";
+import { lightTheme } from "../utils/theme";
 const Bio = () => {
-  /* const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); */
   const isLaptopScreen = useMediaQuery("(min-width: 900px)");
 
   const theme = useTheme();
   const items = [
     "I enjoy working in teams to achieve shared goals and deliver outstanding results.",
-    "I am passionate about staying up-to-date with the latest technologies and trends in the industry.",
+    "Junior Back-end Developer",
   ];
   return (
     <>

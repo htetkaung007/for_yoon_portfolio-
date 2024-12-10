@@ -6,7 +6,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";
 
 const SocialMediaButtons: React.FC = () => {
-  const theme = useTheme(); // Access the globally provided theme
+  const theme = useTheme();
 
   return (
     <Box
@@ -24,7 +24,7 @@ const SocialMediaButtons: React.FC = () => {
       <Tooltip title="Facebook">
         <IconButton
           sx={{
-            color: theme.palette.info.light, // Use the `light` color from theme
+            color: theme.palette.info.light,
             mx: 2,
             borderRadius: "50%",
             border: "2px solid ",

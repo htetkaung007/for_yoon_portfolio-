@@ -13,11 +13,12 @@ import {
   faDocker,
   faAws,
   faGitAlt,
+  faPython,
 } from "@fortawesome/free-brands-svg-icons";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
-import { lightTheme } from "../theme";
+import { lightTheme } from "../utils/theme";
 import { motion } from "framer-motion";
 import { Chip, Divider } from "@mui/material";
 
@@ -30,7 +31,8 @@ const Skills = () => {
 
   const skills = [
     { icon: faJava, color: "#5382A1", label: "Java" },
-    { icon: faReact, color: "#61DAFB", label: "React" },
+    { icon: faPython, color: "#306998", label: "Python" },
+
     { icon: faDatabase, color: "#F39C12", label: "MySQL" },
     { icon: faDocker, color: "#0db7ed", label: "Docker" },
     { icon: faAws, color: "#FF9900", label: "AWS" },
@@ -39,11 +41,7 @@ const Skills = () => {
     { icon: faJs, color: "#F7DF1E", label: "JavaScript" },
   ];
 
-  const visibleIconsCount = isSmallScreen
-    ? 3
-    : isLaptopScreen
-    ? 5
-    : skills.length;
+  const visibleIconsCount = isSmallScreen ? 3 : isLaptopScreen ? 6 : 5;
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -51,7 +49,11 @@ const Skills = () => {
   return (
     <ThemeProvider theme={lightTheme}>
       <Divider>
-        <Chip label="I've learned these skills" size="medium" />
+        <Chip
+          label="I've learned these skills"
+          size="medium"
+          sx={{ color: theme.palette.text.primary }}
+        />
       </Divider>
       <Box
         sx={{
@@ -70,11 +72,11 @@ const Skills = () => {
         {skills.slice(0, visibleIconsCount).map((skill, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }} // Start hidden and slide up
-            animate={{ opacity: 1, y: 0 }} // Animate to visible and default position
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.5,
-              delay: index * 0.2, // Stagger animations for each icon
+              delay: index * 0.2,
             }}
           >
             <Box

@@ -6,25 +6,33 @@ import {
   useTheme,
   useMediaQuery,
   ListItemText,
+  IconButton,
+  Menu,
+  MenuItem,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
-import { ThemeContext } from "../ThemeProviderWrapper";
+import { ThemeContext } from "../utils/ThemeProviderWrapper";
 import Link from "next/link";
-import { useRouter } from "next/router"; // Import useRouter for route detection
-
+import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const TopBar = () => {
+interface Props {
+  children?: React.ReactNode;
+}
+
+const TopBar = ({ children }: Props) => {
   const themeContext = useContext(ThemeContext);
-
   if (!themeContext) return null;
 
   const { toggleTheme } = themeContext;
   const theme = useTheme();
-  const router = useRouter(); // Get the current route
-  const isLaptopScreen = useMediaQuery("(min-width: 1200px)");
-  const isSmallScreen = useMediaQuery("(max-width:635px");
+  const router = useRouter();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
 
   const TopLeftBarItem = [
     {
@@ -34,8 +42,8 @@ const TopBar = () => {
     },
     {
       id: 2,
-      name: "Portfolio",
-      to: "/portfolios",
+      name: "Projects",
+      to: "/projects",
     },
     {
       id: 3,
@@ -44,12 +52,19 @@ const TopBar = () => {
     },
   ];
 
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+  };
+
   return (
     <>
       <AppBar
         color="primary"
         sx={{
-          maxWidth: isLaptopScreen ? "1000px" : "80%",
           position: "sticky",
           minWidth: "400px",
           color: theme.palette.text.primary,
@@ -59,96 +74,138 @@ const TopBar = () => {
           border: "1px ",
           borderRadius: "8px",
           boxShadow: "1px 2px 10px #888888",
-          bgcolor: theme.palette.primary.main,
+          bgcolor: theme.palette.success.main,
         }}
       >
-        <Toolbar sx={{ display: "flex" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "90%",
+            mr: 4,
+            alignItems: "center",
+          }}
+        >
+          {/* Home Link */}
+          <Box>
+            <Link
+              href={"/"}
+              style={{
+                textDecoration: "none",
+                cursor: "pointer",
+                color: theme.palette.text.primary,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  color:
+                    router.pathname === "/"
+                      ? theme.palette.text.disabled
+                      : theme.palette.text.secondary,
+                }}
+              >
+                <HomeIcon sx={{ fontSize: 33 }} />
+                <Typography
+                  sx={{
+                    display: isMediumScreen ? "none" : "block",
+                    fontWeight: "bold",
+                    fontSize: 19,
+                  }}
+                >
+                  {"Home"}
+                </Typography>
+              </Box>
+            </Link>
+          </Box>
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
-              width: "90%",
-              mr: 4,
               alignItems: "center",
+              justifyContent: isSmallScreen ? "space-between" : "flex-end",
+              width: isSmallScreen ? "25%" : "90%",
             }}
           >
-            {/* Home Link */}
-            <Box>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                }}
-              >
-                <Link
-                  href={"/"}
-                  style={{
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    color: theme.palette.text.primary,
+            {/* Toggle Menu: Hamburger for Small Screens */}
+            {isSmallScreen ? (
+              <Box>
+                <IconButton
+                  color="inherit"
+                  onClick={handleMenuOpen}
+                  aria-controls="hamburger-menu"
+                  aria-haspopup="true"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="hamburger-menu"
+                  anchorEl={menuAnchorEl}
+                  open={Boolean(menuAnchorEl)}
+                  onClose={handleMenuClose}
+                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  sx={{
+                    "& .MuiMenu-paper": {
+                      backgroundColor: theme.palette.success.main,
+                      color: theme.palette.text.primary,
+                    },
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      color:
-                        router.pathname === "/"
-                          ? theme.palette.text.secondary
-                          : theme.palette.text.primary,
-                    }}
-                  >
-                    <HomeIcon sx={{ fontSize: 35 }} />
-                    <Typography
-                      sx={{
-                        display: isSmallScreen ? "none" : "block",
-                        alignItems: "center",
-                        fontWeight: "bold",
-                        fontSize: 17,
-                      }}
-                    >
-                      {"Home"}
-                    </Typography>
-                  </Box>
-                </Link>
-              </Box>
-            </Box>
-
-            {/* Other Links */}
-            <Box sx={{ display: "flex" }}>
-              {TopLeftBarItem.map((item) => (
-                <Box key={item.id}>
-                  <Link
-                    href={item.to}
-                    style={{ textDecoration: "none", cursor: "pointer" }}
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-
-                        paddingLeft: "18px",
-                      }}
-                    >
-                      <ListItemText
-                        primary={item.name}
-                        sx={{
+                  {TopLeftBarItem.map((item) => (
+                    <MenuItem key={item.id} onClick={handleMenuClose}>
+                      <Link
+                        href={item.to}
+                        style={{
+                          textDecoration: "none",
                           color:
                             router.pathname === item.to
-                              ? theme.palette.text.secondary
-                              : theme.palette.text.primary,
+                              ? theme.palette.text.disabled
+                              : theme.palette.text.secondary,
                         }}
-                      />
-                    </Box>
-                  </Link>
-                </Box>
-              ))}
-            </Box>
-          </Box>
+                      >
+                        {item.name}
+                      </Link>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : (
+              /* Normal Navigation for Larger Screens */
+              <Box sx={{ display: "flex", mr: "50px" }}>
+                {TopLeftBarItem.map((item) => (
+                  <Box key={item.id}>
+                    <Link
+                      href={item.to}
+                      style={{ textDecoration: "none", cursor: "pointer" }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          paddingLeft: "18px",
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.name}
+                          sx={{
+                            color:
+                              router.pathname === item.to
+                                ? theme.palette.text.disabled
+                                : theme.palette.text.secondary,
+                          }}
+                        />
+                      </Box>
+                    </Link>
+                  </Box>
+                ))}
+              </Box>
+            )}
 
-          {/* Toggle Theme Icon */}
-          <NightsStayIcon onClick={toggleTheme} sx={{ cursor: "pointer" }} />
+            {/* Theme Toggle Icon */}
+            <NightsStayIcon onClick={toggleTheme} sx={{ cursor: "pointer" }} />
+          </Box>
         </Toolbar>
+        {children}
       </AppBar>
     </>
   );

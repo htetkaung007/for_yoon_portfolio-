@@ -11,7 +11,8 @@ import {
   AppBar,
 } from "@mui/material";
 import emailjs from "@emailjs/browser";
-import SocialMediaButtons from "@/components/Column3/SocialMedia";
+import SocialMediaButtons from "@/components/ForContantPage/SocialMedia";
+import { motion } from "framer-motion";
 
 const ContactForm: React.FC = () => {
   // State to hold form input values and submission status
@@ -53,69 +54,77 @@ const ContactForm: React.FC = () => {
 
   const theme = useTheme();
 
-  const isLaptopScreen = useMediaQuery("(min-width: 1200px)");
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
     <AppBar
       position="sticky"
       sx={{
         color: theme.palette.text.primary,
-        minWidth: "400px",
-        maxWidth: isLaptopScreen ? "1000px" : "80%",
+
         padding: "10px",
         border: "1px ",
         borderRadius: "8px",
         boxShadow: "1px 2px 10px #888888",
-        bgcolor: theme.palette.primary.main, // Background color from theme
+        bgcolor: theme.palette.primary.main,
       }}
     >
       <Box sx={{ mb: 3 }}></Box>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.6,
+          delay: 0.3,
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          Contact Us
+        </Typography>
 
-      <Typography variant="h5" gutterBottom>
-        Contact Us
-      </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            margin="normal"
+            variant="filled"
+            sx={{
+              bgcolor: theme.palette.primary.main,
+              color: "white",
+            }}
+          />
+          <TextField
+            fullWidth
+            label="Your Message"
+            multiline
+            rows={4}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+            margin="normal"
+            variant="filled"
+          />
 
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          margin="normal"
-          variant="filled"
-          sx={{
-            bgcolor: theme.palette.primary.main,
-            color: "white",
-          }}
-        />
-        <TextField
-          fullWidth
-          label="Your Message"
-          multiline
-          rows={4}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-          margin="normal"
-          variant="filled"
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          sx={{
-            mt: 2,
-            bgcolor: theme.palette.info.main,
-            color: "white",
-          }}
-        >
-          Send
-        </Button>
-      </form>
-
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end", width: "95%" }}
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                mt: 2,
+                bgcolor: theme.palette.secondary.main,
+                color: "white",
+                width: 100,
+              }}
+            >
+              Send
+            </Button>
+          </Box>
+        </form>
+      </motion.div>
       {status && (
         <Typography
           variant="body2"
@@ -127,6 +136,7 @@ const ContactForm: React.FC = () => {
           {status}
         </Typography>
       )}
+
       <Divider sx={{ mt: 2 }}>
         <Chip
           label="SOCIAL CONTACT"

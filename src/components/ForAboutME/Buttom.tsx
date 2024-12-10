@@ -5,10 +5,11 @@ import { Box, Button, Divider, useMediaQuery, useTheme } from "@mui/material";
 const ButtomCv = () => {
   const theme = useTheme();
   const cvDownloadLink =
-    "https://drive.google.com/uc?export=download&id=1OFyYj8XlDT36Ind2sDqMZfMBf9CGxbvB";
+    "https://drive.google.com/uc?export=download&id=1Seruv0FT3fUvxLEGgj3FNB_L__WsHF_Q";
   const cvViewLink =
-    "https://drive.google.com/file/d/1OFyYj8XlDT36Ind2sDqMZfMBf9CGxbvB/view?usp=drive_link/view?usp=sharing";
-  const isLaptopScreen = useMediaQuery("(min-width: 1200px)");
+    "https://drive.google.com/file/d/1Seruv0FT3fUvxLEGgj3FNB_L__WsHF_Q/view?usp=drive_link/view?usp=sharing";
+
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <>
       <Divider textAlign="right"></Divider>
@@ -16,29 +17,29 @@ const ButtomCv = () => {
         <Box
           sx={{
             display: "flex",
-            maxWidth: isLaptopScreen ? "1000px" : "80%",
-            gap: 2,
+
             alignItems: "center",
-            justifyContent: "space-around",
+
+            justifyContent: "space-evenly",
             mt: 2,
+            mb: 3,
           }}
         >
           {/* View CV Button */}
           <Button
-            variant="outlined"
+            variant="contained"
             href={cvViewLink}
             target="_blank"
             rel="noopener noreferrer"
             sx={{
-              border: 1,
               color: "white",
+              bgcolor: theme.palette.secondary.main,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 1,
+
               textTransform: "none",
               padding: "8px 16px",
-              bgcolor: theme.palette.info.main,
             }}
           >
             <FontAwesomeIcon icon={faEye} style={{ marginRight: 8 }} />
@@ -47,7 +48,7 @@ const ButtomCv = () => {
           {/* Download CV Button with Animation */}
           <motion.div
             animate={{
-              y: [0, -4, 0], // Jump animation
+              y: [0, -4, 0],
             }}
             transition={{
               duration: 2,
@@ -55,16 +56,17 @@ const ButtomCv = () => {
             }}
           >
             <Button
-              color="info"
               variant="contained"
               href={cvDownloadLink}
               target="_blank"
               rel="noopener noreferrer"
               sx={{
+                color: "white",
+                bgcolor: theme.palette.secondary.main,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 1,
+
                 textTransform: "none",
                 padding: "8px 16px",
               }}

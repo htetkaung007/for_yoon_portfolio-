@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -25,12 +26,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
 }) => {
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <motion.div
-      whileHover={{
-        scale: 1.05, // Scale the card up on hover
-        opacity: 0.9, // Slightly decrease opacity
-      }}
       whileTap={{
         scale: 0.95, // Scale down when clicked
       }}
@@ -38,19 +36,39 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         type: "spring",
         stiffness: 300,
       }}
-      style={{ margin: "10px", width: "250px", height: "auto" }}
+      style={{
+        width: isSmallScreen ? "100%" : "80%",
+        height: "auto",
+      }}
     >
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia component="img" alt={title} height="140" image={imageUrl} />
+      <Card
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <CardMedia
+          component="img"
+          alt={/* title */ "Projects"}
+          sx={{ maxWidth: "70%", maxHeight: "220px" }}
+          image={imageUrl}
+        />
         <CardContent>
           <Typography variant="h6" component="div" gutterBottom>
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            sx={{ color: theme.palette.text.primary }}
+          >
             {description}
           </Typography>
         </CardContent>
         <Link
+          target="_blank"
+          rel="noopener noreferrer"
           href={link}
           style={{
             textDecoration: "none",
@@ -62,10 +80,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             size="small"
             sx={{
               display: "block",
-              width: "80%",
-              mr: 2,
+              width: "fulllwidth",
+              mt: 2,
               marginBottom: "10px",
-              backgroundColor: theme.palette.info.main,
+              backgroundColor: theme.palette.secondary.main,
               color: "white",
               "&:hover": {
                 backgroundColor: "#1565C0",
