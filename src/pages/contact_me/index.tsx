@@ -7,7 +7,6 @@ import {
   Divider,
   Chip,
   useTheme,
-  useMediaQuery,
   AppBar,
 } from "@mui/material";
 import emailjs from "@emailjs/browser";

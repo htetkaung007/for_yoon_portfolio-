@@ -52,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <CardMedia
           component="img"
           alt={/* title */ "Projects"}
-          sx={{ maxWidth: "70%", maxHeight: "220px" }}
+          sx={{ mt: 3, maxWidth: "70%", maxHeight: "220px" }}
           image={imageUrl}
         />
         <CardContent>

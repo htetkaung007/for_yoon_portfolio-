@@ -45,7 +45,7 @@ const AnimatedJavaSkill: React.FC = () => {
             color: "text.primary",
           }}
         >
-          "I have a solid foundation and experience in Java".
+          {"I have a solid foundation and experience in Java"}
         </Typography>
       </Box>
     </>

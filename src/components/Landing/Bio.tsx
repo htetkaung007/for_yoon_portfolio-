@@ -1,13 +1,7 @@
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
-import {
-  Box,
-  Button,
-  ListItem,
-  ListItemText,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, ListItem, ListItemText, useMediaQuery } from "@mui/material";
 import { List } from "@mui/material";
 
 import { lightTheme } from "../utils/theme";

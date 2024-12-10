@@ -1,14 +1,5 @@
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import { useContext } from "react";
-import NightsStayIcon from "@mui/icons-material/NightsStay";
-import { ThemeContext } from "../utils/ThemeProviderWrapper";
+import { AppBar, Box, useMediaQuery, useTheme } from "@mui/material";
+
 import TopBar from "./topBar";
 import { motion } from "framer-motion";
 import MovingSquare from "./MovingIcon";
@@ -33,7 +24,7 @@ const Layout = ({ children }: Props) => {
         color="primary"
         sx={{
           position: "sticky",
-
+          minWidth: "420px",
           color: theme.palette.text.primary,
           display: "flex",
           alignItems: "center",
@@ -52,7 +43,7 @@ const Layout = ({ children }: Props) => {
           }}
         >
           <MovingSquare />
-          <TopBar children={children} />
+          <TopBar>{children}</TopBar>
         </Box>
       </AppBar>
     </motion.div>

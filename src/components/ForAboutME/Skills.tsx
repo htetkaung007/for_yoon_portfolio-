@@ -8,7 +8,6 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
 import {
   faJava,
-  faReact,
   faJs,
   faDocker,
   faAws,

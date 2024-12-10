@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  AppBar,
-  Box,
-  Container,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { AppBar, Box, Container, Typography, useTheme } from "@mui/material";
 import ProjectCard from "@/components/utils/ProjectCard";
 
 import GitHubIcon from "@mui/icons-material/GitHub";

@@ -3,16 +3,13 @@ import {
   Toolbar,
   Typography,
   Box,
-  Divider,
-  Chip,
   useTheme,
   useMediaQuery,
-  Button,
 } from "@mui/material";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CopyIcon from "../../utils/copyIcon";
-import Skills from "../ForAboutME/Skills";
+
 import Bio from "./Bio";
 import AnimatedJavaSkill from "./JavaIcon";
 import { motion } from "framer-motion";

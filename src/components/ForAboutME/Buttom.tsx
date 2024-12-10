@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import { Box, Button, Divider, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, Divider, useTheme } from "@mui/material";
 const ButtomCv = () => {
   const theme = useTheme();
   const cvDownloadLink =
@@ -9,7 +9,6 @@ const ButtomCv = () => {
   const cvViewLink =
     "https://drive.google.com/file/d/1Seruv0FT3fUvxLEGgj3FNB_L__WsHF_Q/view?usp=drive_link/view?usp=sharing";
 
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <>
       <Divider textAlign="right"></Divider>

@@ -2,14 +2,10 @@ import Skills from "@/components/ForAboutME/Skills";
 import ButtomCv from "@/components/ForAboutME/Buttom";
 import {
   AppBar,
-  Toolbar,
   Typography,
   Box,
-  Divider,
-  Chip,
   useTheme,
   useMediaQuery,
-  Button,
 } from "@mui/material";
 
 import { motion } from "framer-motion";
@@ -35,11 +31,11 @@ const AboutMe: React.FC = () => {
     >
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <motion.div
-          initial={{ opacity: 0, x: -20 }} // Start hidden and slide up
-          animate={{ opacity: 1, x: 0 }} // Animate to visible and default position
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{
             duration: 0.5,
-            delay: 0.2, // Stagger animations for each icon
+            delay: 0.2,
           }}
         >
           <Box sx={{ mb: 3 }}>

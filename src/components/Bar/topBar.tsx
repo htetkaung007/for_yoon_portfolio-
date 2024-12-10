@@ -23,16 +23,16 @@ interface Props {
 }
 
 const TopBar = ({ children }: Props) => {
-  const themeContext = useContext(ThemeContext);
-  if (!themeContext) return null;
-
-  const { toggleTheme } = themeContext;
   const theme = useTheme();
   const router = useRouter();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const themeContext = useContext(ThemeContext);
+  if (!themeContext) return null;
+
+  const { toggleTheme } = themeContext;
 
   const TopLeftBarItem = [
     {
