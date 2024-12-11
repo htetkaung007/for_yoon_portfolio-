@@ -19,7 +19,6 @@ const AboutMe: React.FC = () => {
       sx={{
         position: "sticky",
 
-        minHeight: "400px",
         color: theme.palette.text.primary,
         maxWidth: isLaptopScreen ? "1000px" : "100%",
         padding: "10px",
@@ -42,7 +41,7 @@ const AboutMe: React.FC = () => {
             <Typography variant="h5" gutterBottom sx={{ textAlign: "center" }}>
               About Me
             </Typography>
-            <Typography variant="subtitle1">
+            <Typography>
               I am a final-year student and fresh graduate passionate about
               backend development. With over three years of experience in
               university projects, I specialize in Java, building scalable

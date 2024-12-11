@@ -16,14 +16,14 @@ const projects = [
   },
   {
     title: "Project Title: Online Voting System [November 2022 - May 2023]",
-    imageUrl: "/bloodSystem.jpg",
+    imageUrl: "/onlineVoting.jpg",
     link: "https://github.com/yoonmyatphoo-mmr/Online-Voting",
     description:
       "Description :  Developed and implemented an Online Voting System tailored for university students, leveraging Spring Boot, Spring Data JPA, Tailwind, JavaScript, and MySQL. The system facilitated the democratic selection of university Queens and Kings through a secure and user-friendly online platform. Admin functionality included the seamless upload of Queen and King selections for voting, ensuring an efficient and transparent process.",
   },
   {
     title: "Project Title : Blood Bank System [June 2022 - August 2022]",
-    imageUrl: "/onlineVoting.jpg",
+    imageUrl: "/bloodSystem.jpg",
     link: "https://github.com/yoonmyatphoo-mmr/Blood_Bank_Management_System",
     description:
       "Description :  Led a project connecting those in urgent need of blood donation s  with willing donors to save lives. Developed a user-friendly syste m  enabling users to easily search for donors by blood group an d  location. Implemented a dual-role system for Admin and Users ,  ensuring strict privacy. Established secure logging for Patients an d  Donors, allowing them to track their processes with restricte d  access. Admin-exclusive visibility ensured confidentiality an d  streamlined data management.",

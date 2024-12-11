@@ -10,7 +10,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import { ThemeContext } from "../utils/ThemeProviderWrapper";
 import Link from "next/link";
@@ -30,6 +30,19 @@ const TopBar = ({ children }: Props) => {
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const themeContext = useContext(ThemeContext);
+  useEffect(() => {
+    const handleResize = () => {
+      if (isMediumScreen) {
+        setMenuAnchorEl(null);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   if (!themeContext) return null;
 
   const { toggleTheme } = themeContext;
@@ -66,7 +79,7 @@ const TopBar = ({ children }: Props) => {
         color="primary"
         sx={{
           position: "sticky",
-          minWidth: "400px",
+
           color: theme.palette.text.primary,
           mt: 6,
           mb: 1,
@@ -129,7 +142,7 @@ const TopBar = ({ children }: Props) => {
           >
             {/* Toggle Menu: Hamburger for Small Screens */}
             {isSmallScreen ? (
-              <Box>
+              <Box sx={{ display: "flex" }}>
                 <IconButton
                   color="inherit"
                   onClick={handleMenuOpen}
@@ -143,7 +156,7 @@ const TopBar = ({ children }: Props) => {
                   anchorEl={menuAnchorEl}
                   open={Boolean(menuAnchorEl)}
                   onClose={handleMenuClose}
-                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  style={{ transform: "translate(10px, -10px)" }}
                   sx={{
                     "& .MuiMenu-paper": {
                       backgroundColor: theme.palette.success.main,

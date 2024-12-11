@@ -24,7 +24,7 @@ const Layout = ({ children }: Props) => {
         color="primary"
         sx={{
           position: "sticky",
-          minWidth: "420px",
+          minWidth: "440px",
           color: theme.palette.text.primary,
           display: "flex",
           alignItems: "center",
