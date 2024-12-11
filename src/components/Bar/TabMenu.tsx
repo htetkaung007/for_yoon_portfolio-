@@ -49,7 +49,6 @@ const TabMenu = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleMenuClose}
-        transformOrigin={{ vertical: "top", horizontal: "left" }}
         sx={{
           "& .MuiMenu-paper": {
             width: "120px",
