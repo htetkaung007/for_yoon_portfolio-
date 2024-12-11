@@ -156,7 +156,7 @@ const TopBar = ({ children }: Props) => {
                   anchorEl={menuAnchorEl}
                   open={Boolean(menuAnchorEl)}
                   onClose={handleMenuClose}
-                  style={{ transform: "translate(10px, -10px)" }}
+                  transformOrigin={{ vertical: "top", horizontal: "center" }}
                   sx={{
                     "& .MuiMenu-paper": {
                       backgroundColor: theme.palette.success.main,
