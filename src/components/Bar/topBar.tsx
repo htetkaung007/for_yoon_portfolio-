@@ -7,7 +7,7 @@ import {
   useMediaQuery,
   ListItemText,
 } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import { ThemeContext } from "../utils/ThemeProviderWrapper";
 import Link from "next/link";

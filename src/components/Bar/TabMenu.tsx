@@ -1,10 +1,10 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import router from "next/router";
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Box, Button, IconButton, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect } from "react";
 
@@ -51,15 +51,11 @@ const TabMenu = () => {
   };
   return (
     <Box>
-      <IconButton
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <MenuIcon />
-      </IconButton>
-
+      <Button>
+        <IconButton onClick={handleClick}>
+          <MenuIcon />
+        </IconButton>
+      </Button>
       <Menu
         anchorEl={anchorEl}
         open={open}
