@@ -1,61 +1,50 @@
 import * as React from "react";
-
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-import router from "next/router";
-import { Box, Button, IconButton, useTheme } from "@mui/material";
+import { useRouter } from "next/router";
+import { Box, IconButton, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect } from "react";
 
 const TabMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const router = useRouter();
+  const theme = useTheme();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const TopLeftBarItem = [
+    { id: 1, name: "About Me", to: "/about_me" },
+    { id: 2, name: "Projects", to: "/projects" },
+    { id: 3, name: "Contact Me", to: "/contact_me" },
+  ];
+
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 900) {
+      if (typeof window !== "undefined" && window.innerWidth >= 900) {
         setAnchorEl(null);
       }
     };
 
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
-  const TopLeftBarItem = [
-    {
-      id: 1,
-      name: "About Me",
-      to: "/about_me",
-    },
-    {
-      id: 2,
-      name: "Projects",
-      to: "/projects",
-    },
-    {
-      id: 3,
-      name: "Contact Me",
-      to: "/contact_me",
-    },
-  ];
-  const theme = useTheme();
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <Box>
-      <Button>
-        <IconButton onClick={handleClick}>
-          <MenuIcon />
-        </IconButton>
-      </Button>
+      <IconButton onClick={handleClick} size="small">
+        <MenuIcon />
+      </IconButton>
       <Menu
         anchorEl={anchorEl}
         open={open}
@@ -63,6 +52,8 @@ const TabMenu = () => {
         transformOrigin={{ vertical: "top", horizontal: "left" }}
         sx={{
           "& .MuiMenu-paper": {
+            width: "120px",
+            marginTop: "10px",
             backgroundColor: theme.palette.success.main,
             color: theme.palette.text.primary,
           },
@@ -88,4 +79,5 @@ const TabMenu = () => {
     </Box>
   );
 };
+
 export default TabMenu;
