@@ -14,8 +14,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 
-import TabMenu from "./TabMenu";
-
 interface Props {
   children?: React.ReactNode;
 }
@@ -114,50 +112,41 @@ const TopBar = ({ children }: Props) => {
               display: "flex",
               alignItems: "center",
               justifyContent: isSmallScreen ? "space-between" : "flex-end",
-              width: isSmallScreen ? "30%" : "90%",
+              width: "90%",
             }}
           >
-            {/* Toggle Menu: Hamburger for Small Screens */}
-            {isSmallScreen ? (
-              <Box display={"flex"}>
-                <TabMenu /> <Typography variant="h6">Menu</Typography>
-              </Box>
-            ) : (
-              /* Normal Navigation for Larger Screens */
-              <Box sx={{ display: "flex" }}>
-                {TopLeftBarItem.map((item) => (
-                  <Box key={item.id}>
-                    <Link
-                      href={item.to}
-                      style={{ textDecoration: "none", cursor: "pointer" }}
+            <Box sx={{ display: "flex" }}>
+              {TopLeftBarItem.map((item) => (
+                <Box key={item.id}>
+                  <Link
+                    href={item.to}
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: "18px",
+                      }}
                     >
-                      <Box
+                      <ListItemText
+                        primary={item.name}
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          paddingLeft: "18px",
+                          color:
+                            router.pathname === item.to
+                              ? theme.palette.text.disabled
+                              : theme.palette.text.secondary,
                         }}
-                      >
-                        <ListItemText
-                          primary={item.name}
-                          sx={{
-                            color:
-                              router.pathname === item.to
-                                ? theme.palette.text.disabled
-                                : theme.palette.text.secondary,
-                          }}
-                        />
-                      </Box>
-                    </Link>
-                  </Box>
-                ))}
-              </Box>
-            )}
+                      />
+                    </Box>
+                  </Link>
+                </Box>
+              ))}
+            </Box>
 
-            {/* Theme Toggle Icon */}
             <NightsStayIcon
               onClick={toggleTheme}
-              sx={{ cursor: "pointer", ml: isSmallScreen ? "5px" : "50px" }}
+              sx={{ cursor: "pointer", ml: isSmallScreen ? "4px" : "50px" }}
             />
           </Box>
         </Toolbar>
