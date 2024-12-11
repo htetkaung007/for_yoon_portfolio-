@@ -32,7 +32,7 @@ const TopBar = ({ children }: Props) => {
   const themeContext = useContext(ThemeContext);
   useEffect(() => {
     const handleResize = () => {
-      if (isMediumScreen) {
+      if (window.innerWidth >= 900) {
         setMenuAnchorEl(null);
       }
     };
