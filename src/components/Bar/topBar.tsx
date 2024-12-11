@@ -119,8 +119,8 @@ const TopBar = ({ children }: Props) => {
           >
             {/* Toggle Menu: Hamburger for Small Screens */}
             {isSmallScreen ? (
-              <Box>
-                <TabMenu />
+              <Box display={"flex"}>
+                <TabMenu /> <Typography variant="h6">Menu</Typography>
               </Box>
             ) : (
               /* Normal Navigation for Larger Screens */
