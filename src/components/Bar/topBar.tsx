@@ -6,9 +6,6 @@ import {
   useTheme,
   useMediaQuery,
   ListItemText,
-  IconButton,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
@@ -16,7 +13,8 @@ import { ThemeContext } from "../utils/ThemeProviderWrapper";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
-import MenuIcon from "@mui/icons-material/Menu";
+
+import TabMenu from "./TabMenu";
 
 interface Props {
   children?: React.ReactNode;
@@ -28,21 +26,8 @@ const TopBar = ({ children }: Props) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const themeContext = useContext(ThemeContext);
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 900) {
-        setMenuAnchorEl(null);
-      }
-    };
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   if (!themeContext) return null;
 
   const { toggleTheme } = themeContext;
@@ -64,14 +49,6 @@ const TopBar = ({ children }: Props) => {
       to: "/contact_me",
     },
   ];
-
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMenuAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setMenuAnchorEl(null);
-  };
 
   return (
     <>
@@ -137,54 +114,17 @@ const TopBar = ({ children }: Props) => {
               display: "flex",
               alignItems: "center",
               justifyContent: isSmallScreen ? "space-between" : "flex-end",
-              width: isSmallScreen ? "25%" : "90%",
+              width: isSmallScreen ? "30%" : "90%",
             }}
           >
             {/* Toggle Menu: Hamburger for Small Screens */}
             {isSmallScreen ? (
-              <Box sx={{ display: "flex" }}>
-                <IconButton
-                  color="inherit"
-                  onClick={handleMenuOpen}
-                  aria-controls="hamburger-menu"
-                  aria-haspopup="true"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="hamburger-menu"
-                  anchorEl={menuAnchorEl}
-                  open={Boolean(menuAnchorEl)}
-                  onClose={handleMenuClose}
-                  transformOrigin={{ vertical: "top", horizontal: "center" }}
-                  sx={{
-                    "& .MuiMenu-paper": {
-                      backgroundColor: theme.palette.success.main,
-                      color: theme.palette.text.primary,
-                    },
-                  }}
-                >
-                  {TopLeftBarItem.map((item) => (
-                    <MenuItem key={item.id} onClick={handleMenuClose}>
-                      <Link
-                        href={item.to}
-                        style={{
-                          textDecoration: "none",
-                          color:
-                            router.pathname === item.to
-                              ? theme.palette.text.disabled
-                              : theme.palette.text.secondary,
-                        }}
-                      >
-                        {item.name}
-                      </Link>
-                    </MenuItem>
-                  ))}
-                </Menu>
+              <Box>
+                <TabMenu />
               </Box>
             ) : (
               /* Normal Navigation for Larger Screens */
-              <Box sx={{ display: "flex", mr: "50px" }}>
+              <Box sx={{ display: "flex" }}>
                 {TopLeftBarItem.map((item) => (
                   <Box key={item.id}>
                     <Link
@@ -215,7 +155,10 @@ const TopBar = ({ children }: Props) => {
             )}
 
             {/* Theme Toggle Icon */}
-            <NightsStayIcon onClick={toggleTheme} sx={{ cursor: "pointer" }} />
+            <NightsStayIcon
+              onClick={toggleTheme}
+              sx={{ cursor: "pointer", ml: isSmallScreen ? "5px" : "50px" }}
+            />
           </Box>
         </Toolbar>
         {children}

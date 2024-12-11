@@ -30,7 +30,6 @@ const Layout = ({ children }: Props) => {
           alignItems: "center",
           margin: "auto",
           width: "100%",
-          padding: "10px",
 
           bgcolor: theme.palette.info.main,
           minHeight: "100vh",
